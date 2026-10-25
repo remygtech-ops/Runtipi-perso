@@ -5,18 +5,33 @@
   "short_desc": "Self-hosted gym and body-weight tracker with passkey login.",
   "author": "DuarteSantos8",
   "port": 8391,
-  "categories": ["utilities"],
+  "categories": [
+    "utilities"
+  ],
   "description": "openGym is a self-hosted gym and body-weight tracker: weekly routines over 5,600+ animated exercises, guided workouts, set logging, stats and PRs, installable PWA, offline sync and passkey sign-in. Your data stays in a folder you control.",
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "1.4.2",
   "source": "https://github.com/DuarteSantos8/openGym",
   "website": "https://opengym.ch",
   "exposable": true,
-  "supported_architectures": ["arm64", "amd64"],
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
   "created_at": 1792946824000,
-  "updated_at": 1792946824000,
+  "updated_at": 1792948578009,
   "dynamic_config": true,
   "form_fields": [
+    {
+      "type": "text",
+      "label": "Public domain",
+      "env_variable": "OPENGYM_DOMAIN",
+      "placeholder": "gym.example.com",
+      "hint": "Domain you reach openGym on, over HTTPS (e.g. through your reverse proxy). Passkeys are bound to it. Hostname only, no https:// and no port.",
+      "required": true,
+      "regex": "^[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?$",
+      "pattern_error": "Hostname only, without https:// or port."
+    },
     {
       "type": "text",
       "label": "Default language",
