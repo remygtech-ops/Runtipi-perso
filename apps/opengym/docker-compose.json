@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "opengym-api",
+      "image": "ghcr.io/duartesantos8/opengym-api:1.4.2",
+      "environment": [
+        { "key": "PORT", "value": "3000" },
+        { "key": "DATA_DIR", "value": "/data" },
+        { "key": "TRUST_PROXY", "value": "1" },
+        { "key": "RP_ID", "value": "${APP_DOMAIN}" },
+        { "key": "ORIGIN", "value": "${APP_PROTOCOL}://${APP_DOMAIN}" },
+        { "key": "RP_NAME", "value": "openGym" },
+        { "key": "DEFAULT_LANG", "value": "${OPENGYM_DEFAULT_LANG}" }
+      ],
+      "volumes": [{ "hostPath": "${APP_DATA_DIR}/data/data", "containerPath": "/data" }]
+    },
+    {
+      "name": "opengym",
+      "image": "ghcr.io/duartesantos8/opengym-web:1.4.2",
+      "isMain": true,
+      "internalPort": 80,
+      "environment": [
+        { "key": "NGINX_PORT", "value": "80" },
+        { "key": "BACKEND", "value": "opengym-api" },
+        { "key": "PORT", "value": "3000" }
+      ],
+      "dependsOn": ["opengym-api"]
+    }
+  ]
+}

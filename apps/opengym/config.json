@@ -1,0 +1,29 @@
+{
+  "name": "openGym",
+  "id": "opengym",
+  "available": true,
+  "short_desc": "Self-hosted gym and body-weight tracker with passkey login.",
+  "author": "DuarteSantos8",
+  "port": 8391,
+  "categories": ["utilities"],
+  "description": "openGym is a self-hosted gym and body-weight tracker: weekly routines over 5,600+ animated exercises, guided workouts, set logging, stats and PRs, installable PWA, offline sync and passkey sign-in. Your data stays in a folder you control.",
+  "tipi_version": 1,
+  "version": "1.4.2",
+  "source": "https://github.com/DuarteSantos8/openGym",
+  "website": "https://opengym.ch",
+  "exposable": true,
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1792946824000,
+  "updated_at": 1792946824000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Default language",
+      "env_variable": "OPENGYM_DEFAULT_LANG",
+      "hint": "Language of the sign-in screen: en, fr, de, es, it, pt, pt-BR...",
+      "default": "fr",
+      "required": true
+    }
+  ]
+}

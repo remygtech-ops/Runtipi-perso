@@ -1,0 +1,39 @@
+{
+  "name": "Securo",
+  "id": "securo",
+  "available": true,
+  "short_desc": "Self-hosted personal finance manager: accounts, budgets, bank sync.",
+  "author": "securo-finance",
+  "port": 8390,
+  "categories": ["finance"],
+  "description": "Securo is an open-source personal finance manager that runs on your own infrastructure. Multi-account tracking, transactions, budgets, goals, recurring operations, OFX/QIF/CSV import, Enable Banking sync for European banks, multi-currency and optional OIDC login.",
+  "tipi_version": 1,
+  "version": "0.16.5",
+  "source": "https://github.com/securo-finance/securo",
+  "website": "https://usesecuro.com",
+  "exposable": true,
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1792946824000,
+  "updated_at": 1792946824000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Secret key",
+      "env_variable": "SECURO_SECRET_KEY",
+      "hint": "Signs the sessions. Generated automatically, do not change it afterwards.",
+      "min": 64,
+      "encoding": "hex",
+      "required": true
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "env_variable": "SECURO_DB_PASSWORD",
+      "hint": "Password of the internal PostgreSQL. Generated automatically.",
+      "min": 32,
+      "encoding": "hex",
+      "required": true
+    }
+  ]
+}
