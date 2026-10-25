@@ -12,7 +12,7 @@ A self-hosted gym and body-weight tracker you actually own. No subscription, no 
 
 ## Important: passkeys need HTTPS
 
-Passkeys are bound to the exact hostname and browsers only allow them over HTTPS. **Expose the app on a domain** (or use a local HTTPS domain) from the Runtipi app settings, then create your profile. The first profile created becomes admin only if `FIRST_USER_ADMIN=1` is set, see the [self-hosting guide](https://github.com/DuarteSantos8/openGym/blob/main/docs/SELF_HOSTING.md).
+Passkeys are bound to the exact hostname and browsers only allow them over HTTPS. Put the app behind a reverse proxy that serves it over HTTPS (BunkerWeb, Traefik, Nginx Proxy Manager...) and enter that domain in the **Public domain** field at install time, then create your profile. The first profile created becomes admin only if `FIRST_USER_ADMIN=1` is set, see the [self-hosting guide](https://github.com/DuarteSantos8/openGym/blob/main/docs/SELF_HOSTING.md).
 
 ## Data
 

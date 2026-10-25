@@ -8,8 +8,8 @@
         { "key": "PORT", "value": "3000" },
         { "key": "DATA_DIR", "value": "/data" },
         { "key": "TRUST_PROXY", "value": "1" },
-        { "key": "RP_ID", "value": "${APP_DOMAIN}" },
-        { "key": "ORIGIN", "value": "${APP_PROTOCOL}://${APP_DOMAIN}" },
+        { "key": "RP_ID", "value": "${OPENGYM_DOMAIN}" },
+        { "key": "ORIGIN", "value": "https://${OPENGYM_DOMAIN}" },
         { "key": "RP_NAME", "value": "openGym" },
         { "key": "DEFAULT_LANG", "value": "${OPENGYM_DEFAULT_LANG}" }
       ],
