@@ -1,0 +1,24 @@
+{
+  "name": "Wallos",
+  "id": "wallos",
+  "available": true,
+  "tipi_version": 1,
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1792947183964,
+  "updated_at": 1792947183964,
+  "dynamic_config": true,
+  "short_desc": "Track your subscriptions and recurring expenses.",
+  "author": "ellite",
+  "port": 8392,
+  "categories": [
+    "finance"
+  ],
+  "description": "Wallos is an open-source, self-hostable personal subscription tracker. Keep an eye on recurring expenses, get renewal notifications, view stats and convert currencies.",
+  "version": "5.10.2",
+  "source": "https://github.com/ellite/Wallos",
+  "form_fields": []
+}

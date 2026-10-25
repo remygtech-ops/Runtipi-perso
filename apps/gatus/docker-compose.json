@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "gatus",
+      "image": "ghcr.io/twin/gatus:v5.37.0",
+      "isMain": true,
+      "internalPort": 8080,
+      "environment": [
+        {
+          "key": "GATUS_CONFIG_PATH",
+          "value": "/config/config.yaml"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/config",
+          "containerPath": "/config"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/storage",
+          "containerPath": "/data"
+        }
+      ]
+    }
+  ]
+}

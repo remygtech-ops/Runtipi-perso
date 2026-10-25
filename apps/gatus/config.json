@@ -1,0 +1,25 @@
+{
+  "name": "Gatus",
+  "id": "gatus",
+  "available": true,
+  "tipi_version": 1,
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1792947183964,
+  "updated_at": 1792947183964,
+  "dynamic_config": true,
+  "short_desc": "Developer-oriented health dashboard configured in YAML.",
+  "author": "TwiN",
+  "port": 8396,
+  "categories": [
+    "network"
+  ],
+  "description": "Gatus is a health dashboard that lets you monitor your services with conditions on status, response time, certificates and more, configured as code in a YAML file, with alerting.",
+  "version": "5.37.0",
+  "source": "https://github.com/TwiN/gatus",
+  "website": "https://gatus.io",
+  "form_fields": []
+}

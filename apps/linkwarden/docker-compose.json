@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "linkwarden-db",
+      "image": "postgres:16-alpine",
+      "environment": [
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${LINKWARDEN_DB_PASSWORD}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U postgres",
+        "interval": "5s",
+        "timeout": "3s",
+        "retries": 10
+      }
+    },
+    {
+      "name": "linkwarden-meilisearch",
+      "image": "getmeili/meilisearch:v1.13.3",
+      "environment": [
+        {
+          "key": "MEILI_MASTER_KEY",
+          "value": "${LINKWARDEN_MEILI_KEY}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/meili",
+          "containerPath": "/meili_data"
+        }
+      ]
+    },
+    {
+      "name": "linkwarden",
+      "image": "ghcr.io/linkwarden/linkwarden:v2.16.3",
+      "isMain": true,
+      "internalPort": 3000,
+      "environment": [
+        {
+          "key": "NEXTAUTH_URL",
+          "value": "${APP_PROTOCOL}://${APP_DOMAIN}/api/v1/auth"
+        },
+        {
+          "key": "NEXTAUTH_SECRET",
+          "value": "${LINKWARDEN_AUTH_SECRET}"
+        },
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql://postgres:${LINKWARDEN_DB_PASSWORD}@linkwarden-db:5432/postgres"
+        },
+        {
+          "key": "MEILI_HOST",
+          "value": "http://linkwarden-meilisearch:7700"
+        },
+        {
+          "key": "MEILI_MASTER_KEY",
+          "value": "${LINKWARDEN_MEILI_KEY}"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${LINKWARDEN_DB_PASSWORD}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/data",
+          "containerPath": "/data/data"
+        }
+      ],
+      "dependsOn": {
+        "linkwarden-db": {
+          "condition": "service_healthy"
+        },
+        "linkwarden-meilisearch": {
+          "condition": "service_started"
+        }
+      }
+    }
+  ]
+}

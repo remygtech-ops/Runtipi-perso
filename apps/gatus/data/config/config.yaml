@@ -1,0 +1,18 @@
+# Gatus configuration. Edit then restart the app.
+# Docs: https://github.com/TwiN/gatus#configuration
+storage:
+  type: sqlite
+  path: /data/data.db
+
+ui:
+  title: Status
+
+endpoints:
+  - name: Example website
+    group: sample
+    url: "https://example.org"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1000"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
