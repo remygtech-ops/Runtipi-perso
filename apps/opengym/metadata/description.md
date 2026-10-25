@@ -12,7 +12,7 @@ A self-hosted gym and body-weight tracker you actually own. No subscription, no 
 
 ## Important: passkeys need HTTPS
 
-Passkeys are bound to the exact hostname and browsers only allow them over HTTPS. Put the app behind a reverse proxy that serves it over HTTPS (BunkerWeb, Traefik, Nginx Proxy Manager...) and enter that domain in the **Public domain** field at install time, then create your profile. The first profile created becomes admin only if `FIRST_USER_ADMIN=1` is set, see the [self-hosting guide](https://github.com/DuarteSantos8/openGym/blob/main/docs/SELF_HOSTING.md).
+Passkeys are bound to the exact hostname and browsers only allow them over HTTPS. Put the app behind a reverse proxy that serves it over HTTPS (BunkerWeb, Traefik, Nginx Proxy Manager...) and enter that domain in the **Public domain** field at install time, then create your profile. To get the Admin dashboard (invite codes, AI Coach...), create your profile, copy its **Account ID** (Settings > Account) and put it in the **Admin user IDs** field of the app, then restart. See the [self-hosting guide](https://github.com/DuarteSantos8/openGym/blob/main/docs/SELF_HOSTING.md).
 
 ## Data
 

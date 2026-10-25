@@ -11,7 +11,8 @@
         { "key": "RP_ID", "value": "${OPENGYM_DOMAIN}" },
         { "key": "ORIGIN", "value": "https://${OPENGYM_DOMAIN}" },
         { "key": "RP_NAME", "value": "openGym" },
-        { "key": "DEFAULT_LANG", "value": "${OPENGYM_DEFAULT_LANG}" }
+        { "key": "DEFAULT_LANG", "value": "${OPENGYM_DEFAULT_LANG}" },
+        { "key": "ADMIN_UIDS", "value": "${OPENGYM_ADMIN_UIDS:-}" }
       ],
       "volumes": [{ "hostPath": "${APP_DATA_DIR}/data/data", "containerPath": "/data" }]
     },

@@ -9,7 +9,7 @@
     "utilities"
   ],
   "description": "openGym is a self-hosted gym and body-weight tracker: weekly routines over 5,600+ animated exercises, guided workouts, set logging, stats and PRs, installable PWA, offline sync and passkey sign-in. Your data stays in a folder you control.",
-  "tipi_version": 2,
+  "tipi_version": 3,
   "version": "1.4.2",
   "source": "https://github.com/DuarteSantos8/openGym",
   "website": "https://opengym.ch",
@@ -19,7 +19,7 @@
     "amd64"
   ],
   "created_at": 1792946824000,
-  "updated_at": 1792948578009,
+  "updated_at": 1792951517704,
   "dynamic_config": true,
   "form_fields": [
     {
@@ -39,6 +39,13 @@
       "hint": "Language of the sign-in screen: en, fr, de, es, it, pt, pt-BR...",
       "default": "fr",
       "required": true
+    },
+    {
+      "type": "text",
+      "label": "Admin user IDs",
+      "env_variable": "OPENGYM_ADMIN_UIDS",
+      "placeholder": "abc123,def456",
+      "hint": "Optional. Account IDs (Settings > Account > Account ID) of the admins, comma-separated. They get the Admin dashboard, which is where the AI Coach is set up."
     }
   ]
 }
