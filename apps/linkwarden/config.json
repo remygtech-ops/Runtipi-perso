@@ -1,0 +1,53 @@
+{
+  "name": "Linkwarden",
+  "id": "linkwarden",
+  "available": true,
+  "tipi_version": 1,
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1792947183964,
+  "updated_at": 1792947183964,
+  "dynamic_config": true,
+  "short_desc": "Collaborative bookmark manager that archives the pages you save.",
+  "author": "linkwarden",
+  "port": 8394,
+  "categories": [
+    "utilities"
+  ],
+  "description": "Linkwarden is a self-hosted, open-source collaborative bookmark manager. It organizes links in collections, tags them, full-text searches them and archives each page (screenshot, PDF, readable view) so it never disappears.",
+  "version": "2.16.3",
+  "source": "https://github.com/linkwarden/linkwarden",
+  "website": "https://linkwarden.app",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Auth secret",
+      "env_variable": "LINKWARDEN_AUTH_SECRET",
+      "hint": "Signs sessions. Generated automatically.",
+      "min": 64,
+      "encoding": "hex",
+      "required": true
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "env_variable": "LINKWARDEN_DB_PASSWORD",
+      "hint": "Internal PostgreSQL password. Generated automatically.",
+      "min": 32,
+      "encoding": "hex",
+      "required": true
+    },
+    {
+      "type": "random",
+      "label": "Meilisearch key",
+      "env_variable": "LINKWARDEN_MEILI_KEY",
+      "hint": "Internal search engine key. Generated automatically.",
+      "min": 32,
+      "encoding": "hex",
+      "required": true
+    }
+  ]
+}

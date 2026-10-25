@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "speedtest-tracker",
+      "image": "lscr.io/linuxserver/speedtest-tracker:latest",
+      "isMain": true,
+      "internalPort": 80,
+      "environment": [
+        {
+          "key": "PUID",
+          "value": "1000"
+        },
+        {
+          "key": "PGID",
+          "value": "1000"
+        },
+        {
+          "key": "TZ",
+          "value": "Europe/Paris"
+        },
+        {
+          "key": "APP_KEY",
+          "value": "${SPEEDTEST_APP_KEY}"
+        },
+        {
+          "key": "APP_URL",
+          "value": "${APP_PROTOCOL}://${APP_DOMAIN}"
+        },
+        {
+          "key": "DB_CONNECTION",
+          "value": "sqlite"
+        },
+        {
+          "key": "SPEEDTEST_SCHEDULE",
+          "value": "${SPEEDTEST_SCHEDULE}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/config",
+          "containerPath": "/config"
+        }
+      ]
+    }
+  ]
+}

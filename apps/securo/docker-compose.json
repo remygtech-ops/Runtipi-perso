@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "securo-redis",
+      "image": "docker.io/library/redis:8-alpine",
+      "healthCheck": { "test": "redis-cli ping", "interval": "5s", "timeout": "3s", "retries": 5 }
+    },
+    {
+      "name": "securo-db",
+      "image": "docker.io/pgvector/pgvector:pg16",
+      "environment": [
+        { "key": "POSTGRES_USER", "value": "securo" },
+        { "key": "POSTGRES_PASSWORD", "value": "${SECURO_DB_PASSWORD}" },
+        { "key": "POSTGRES_DB", "value": "securo" }
+      ],
+      "volumes": [{ "hostPath": "${APP_DATA_DIR}/data/postgres", "containerPath": "/var/lib/postgresql/data" }],
+      "healthCheck": { "test": "pg_isready -U securo -d securo", "interval": "5s", "timeout": "3s", "retries": 10 }
+    },
+    {
+      "name": "securo-backend",
+      "image": "ghcr.io/securo-finance/securo-backend:0.16.5",
+      "command": ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"],
+      "environment": [
+        { "key": "DATABASE_URL", "value": "postgresql+asyncpg://securo:${SECURO_DB_PASSWORD}@securo-db:5432/securo" },
+        { "key": "REDIS_URL", "value": "redis://securo-redis:6379/0" },
+        { "key": "SECRET_KEY", "value": "${SECURO_SECRET_KEY}" },
+        { "key": "FRONTEND_URL", "value": "${APP_PROTOCOL}://${APP_DOMAIN}" },
+        { "key": "STORAGE_LOCAL_PATH", "value": "/app/data/attachments" },
+        { "key": "AGENTS_KNOWLEDGE_STORAGE_PATH", "value": "/app/data/agent_knowledge" },
+        { "key": "TRUSTED_PROXY_HOPS", "value": "1" }
+      ],
+      "volumes": [
+        { "hostPath": "${APP_DATA_DIR}/data/secrets", "containerPath": "/app/secrets", "readOnly": true },
+        { "hostPath": "${APP_DATA_DIR}/data/attachments", "containerPath": "/app/data/attachments" },
+        { "hostPath": "${APP_DATA_DIR}/data/agent_knowledge", "containerPath": "/app/data/agent_knowledge" },
+        { "hostPath": "${APP_DATA_DIR}/data/embedding_models", "containerPath": "/app/data/embedding_models" }
+      ],
+      "dependsOn": {
+        "securo-db": { "condition": "service_healthy" },
+        "securo-redis": { "condition": "service_healthy" }
+      }
+    },
+    {
+      "name": "securo-worker",
+      "image": "ghcr.io/securo-finance/securo-backend:0.16.5",
+      "command": ["celery", "-A", "app.worker", "worker", "--loglevel=info", "--concurrency=2"],
+      "environment": [
+        { "key": "DATABASE_URL", "value": "postgresql+asyncpg://securo:${SECURO_DB_PASSWORD}@securo-db:5432/securo" },
+        { "key": "REDIS_URL", "value": "redis://securo-redis:6379/0" },
+        { "key": "SECRET_KEY", "value": "${SECURO_SECRET_KEY}" },
+        { "key": "FRONTEND_URL", "value": "${APP_PROTOCOL}://${APP_DOMAIN}" },
+        { "key": "STORAGE_LOCAL_PATH", "value": "/app/data/attachments" },
+        { "key": "AGENTS_KNOWLEDGE_STORAGE_PATH", "value": "/app/data/agent_knowledge" }
+      ],
+      "volumes": [
+        { "hostPath": "${APP_DATA_DIR}/data/secrets", "containerPath": "/app/secrets", "readOnly": true },
+        { "hostPath": "${APP_DATA_DIR}/data/attachments", "containerPath": "/app/data/attachments" },
+        { "hostPath": "${APP_DATA_DIR}/data/agent_knowledge", "containerPath": "/app/data/agent_knowledge" },
+        { "hostPath": "${APP_DATA_DIR}/data/embedding_models", "containerPath": "/app/data/embedding_models" }
+      ],
+      "dependsOn": {
+        "securo-db": { "condition": "service_healthy" },
+        "securo-redis": { "condition": "service_healthy" }
+      }
+    },
+    {
+      "name": "securo-beat",
+      "image": "ghcr.io/securo-finance/securo-backend:0.16.5",
+      "command": ["celery", "-A", "app.worker", "beat", "--loglevel=info"],
+      "environment": [
+        { "key": "DATABASE_URL", "value": "postgresql+asyncpg://securo:${SECURO_DB_PASSWORD}@securo-db:5432/securo" },
+        { "key": "REDIS_URL", "value": "redis://securo-redis:6379/0" },
+        { "key": "SECRET_KEY", "value": "${SECURO_SECRET_KEY}" },
+        { "key": "FRONTEND_URL", "value": "${APP_PROTOCOL}://${APP_DOMAIN}" }
+      ],
+      "dependsOn": {
+        "securo-db": { "condition": "service_healthy" },
+        "securo-redis": { "condition": "service_healthy" }
+      }
+    },
+    {
+      "name": "securo",
+      "image": "ghcr.io/securo-finance/securo-frontend:0.16.5",
+      "isMain": true,
+      "internalPort": 8080,
+      "environment": [
+        { "key": "BACKEND_URL", "value": "http://securo-backend:8000" },
+        { "key": "FRONTEND_URL", "value": "${APP_PROTOCOL}://${APP_DOMAIN}" }
+      ],
+      "dependsOn": ["securo-backend"]
+    }
+  ]
+}

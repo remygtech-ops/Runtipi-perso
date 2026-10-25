@@ -1,0 +1,43 @@
+{
+  "name": "Speedtest Tracker",
+  "id": "speedtest-tracker",
+  "available": true,
+  "tipi_version": 1,
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1792947183964,
+  "updated_at": 1792947183964,
+  "dynamic_config": true,
+  "short_desc": "Runs scheduled internet speed tests and keeps the history.",
+  "author": "alexjustesen",
+  "port": 8397,
+  "categories": [
+    "network"
+  ],
+  "description": "Speedtest Tracker runs scheduled internet speed tests with the Ookla CLI, stores download, upload, ping and jitter history, shows charts and can notify you when results degrade.",
+  "version": "1.15.1",
+  "source": "https://github.com/alexjustesen/speedtest-tracker",
+  "website": "https://docs.speedtest-tracker.dev",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Application key",
+      "env_variable": "SPEEDTEST_APP_KEY",
+      "hint": "Laravel encryption key (32 characters). Generated automatically, do not change it.",
+      "min": 32,
+      "encoding": "hex",
+      "required": true
+    },
+    {
+      "type": "text",
+      "label": "Test schedule (cron)",
+      "env_variable": "SPEEDTEST_SCHEDULE",
+      "default": "0 * * * *",
+      "hint": "Cron expression. Default: every hour.",
+      "required": true
+    }
+  ]
+}
