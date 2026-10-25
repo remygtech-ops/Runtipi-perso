@@ -9,7 +9,7 @@
     "utilities"
   ],
   "description": "openGym is a self-hosted gym and body-weight tracker: weekly routines over 5,600+ animated exercises, guided workouts, set logging, stats and PRs, installable PWA, offline sync and passkey sign-in. Your data stays in a folder you control.",
-  "tipi_version": 3,
+  "tipi_version": 4,
   "version": "1.4.2",
   "source": "https://github.com/DuarteSantos8/openGym",
   "website": "https://opengym.ch",
@@ -19,7 +19,7 @@
     "amd64"
   ],
   "created_at": 1792946824000,
-  "updated_at": 1792951517704,
+  "updated_at": 1792951966610,
   "dynamic_config": true,
   "form_fields": [
     {
