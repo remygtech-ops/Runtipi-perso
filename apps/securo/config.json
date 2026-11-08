@@ -5,16 +5,21 @@
   "short_desc": "Self-hosted personal finance manager: accounts, budgets, bank sync.",
   "author": "securo-finance",
   "port": 8390,
-  "categories": ["finance"],
+  "categories": [
+    "finance"
+  ],
   "description": "Securo is an open-source personal finance manager that runs on your own infrastructure. Multi-account tracking, transactions, budgets, goals, recurring operations, OFX/QIF/CSV import, Enable Banking sync for European banks, multi-currency and optional OIDC login.",
-  "tipi_version": 1,
-  "version": "0.16.5",
+  "tipi_version": 2,
+  "version": "0.18.0",
   "source": "https://github.com/securo-finance/securo",
   "website": "https://usesecuro.com",
   "exposable": true,
-  "supported_architectures": ["arm64", "amd64"],
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
   "created_at": 1792946824000,
-  "updated_at": 1792946824000,
+  "updated_at": 1794178126451,
   "dynamic_config": true,
   "form_fields": [
     {

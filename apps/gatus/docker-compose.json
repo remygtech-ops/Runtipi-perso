@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "gatus",
-      "image": "ghcr.io/twin/gatus:v5.37.0",
+      "image": "ghcr.io/twin/gatus:v5.38.0",
       "isMain": true,
       "internalPort": 8080,
       "environment": [
