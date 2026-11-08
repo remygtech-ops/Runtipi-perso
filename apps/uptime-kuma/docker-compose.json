@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "uptime-kuma",
-      "image": "louislam/uptime-kuma:2.5.7",
+      "image": "louislam/uptime-kuma:2.5.9",
       "isMain": true,
       "internalPort": 3001,
       "volumes": [
